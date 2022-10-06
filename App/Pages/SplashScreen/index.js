@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View, Text, StyleSheet, Image, Dimensions  } from 'react-native';
 import { BannerSplash  } from '../../assets'
-import { MyButton } from '../../Componets'
+import { PrimaryButton } from '../../Componets'
 const windowHeight = Dimensions.get('window').height;
 
 
@@ -19,7 +19,7 @@ export default SplashScreen = () => {
             and Friends provides a sense of belonging and security 
         </Text>
 
-        <MyButton  title="Continue"/>
+        <PrimaryButton  title="Continue"/>
 
         <Text style={styles.footherText}>Already have an account? Sign In</Text>
       </View>

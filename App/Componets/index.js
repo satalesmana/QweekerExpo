@@ -1,5 +1,5 @@
-import MyButton from './MyButton'
+import PrimaryButton from './MyButton'
 
 export {
-    MyButton
+    PrimaryButton
 }

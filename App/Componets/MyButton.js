@@ -5,16 +5,10 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-const onPress = ()=>{
-  alert('onPress')
-}
-
-const MyButton=({title}) =>{
+const PrimaryButton=(props) =>{
     return (
-      <TouchableOpacity 
-        style={styles.btnContainer}
-        onPress={onPress}>
-        <Text style={styles.btnText}>{title}</Text>
+      <TouchableOpacity  style={[styles.btnContainer, props.style]} onPress={props.onPress}>
+        <Text style={styles.btnText}>{props.title}</Text>
       </TouchableOpacity>
     )
 }
@@ -34,4 +28,4 @@ const styles = StyleSheet.create({
       }
 })
 
-export default MyButton;
+export default PrimaryButton;
