@@ -31,7 +31,7 @@ export default SecurityScreen = () => {
         <TextInput style={styles.inputText} placeholder='Confirm Password'/>
       </View>
 
-      <PrimaryButton title='Next' style={styles.customeButton}/>
+      <PrimaryButton title='Done' style={styles.customeButton}/>
       <View style={styles.foother}>
         <Text style={styles.boddyText}>Already have an account? </Text>
         <Text style={[styles.boddyText,{color:'#006175'}]}>Sign In</Text>
