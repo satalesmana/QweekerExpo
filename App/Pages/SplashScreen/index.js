@@ -5,7 +5,7 @@ import { PrimaryButton } from '../../Componets'
 const windowHeight = Dimensions.get('window').height;
 
 
-export default SplashScreen = () => {
+export default SplashScreen = ({navigation}) => {
   return (
     <View style={styles.bgMainApp}>
       <View style={styles.imgContainer}>
@@ -19,7 +19,7 @@ export default SplashScreen = () => {
             and Friends provides a sense of belonging and security 
         </Text>
 
-        <PrimaryButton  title="Continue"/>
+        <PrimaryButton  title="Continue" onPress={()=>navigation.navigate('SignupScreen')}/>
 
         <Text style={styles.footherText}>Already have an account? Sign In</Text>
       </View>

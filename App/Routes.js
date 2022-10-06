@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 
 export default Router = () => {
   return (
-    <Stack.Navigator initialRouteName="RegisterDoneScreen">
+    <Stack.Navigator initialRouteName="SplashScreen">
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="SignupScreen" component={SignupScreen} options={{headerShown: false}}/>
       <Stack.Screen name="SplashScreen" component={SplashScreen} options={{headerShown: false}}/>

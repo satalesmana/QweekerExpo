@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { PrimaryButton  } from '../../Componets'
 
-export default SignupScreen = () => {
+export default SignupScreen = ({navigation}) => {
   return (
     <SafeAreaView  style={styles.container}>
       <View style={styles.content}>
@@ -17,7 +17,7 @@ export default SignupScreen = () => {
         <TextInput style={styles.inputText} placeholder='youremail@domain.com'/>
       </View>
      
-     <PrimaryButton title='Next' style={styles.customeButton}/>
+     <PrimaryButton title='Next' style={styles.customeButton}  onPress={()=>navigation.navigate('PersonalInfoScreen')}/>
      <View style={styles.foother}>
        <Text style={styles.boddyText}>Already have an account? </Text>
        <Text style={[styles.boddyText,{color:'#006175'}]}>Sign In</Text>
