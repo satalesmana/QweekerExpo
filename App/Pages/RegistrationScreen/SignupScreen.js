@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
        paddingRight:25,
     },
     content:{
-      marginTop:250
+      marginTop:200
     },
     headerText:{
       fontFamily:'Poppins-SemiBold',
