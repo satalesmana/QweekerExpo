@@ -28,6 +28,10 @@ const MainScreen = () =>{
           iconName = focused ? 'home' : 'home-outline';
         } else if (route.name === 'Settings') {
           iconName = focused ? 'ios-settings' : 'ios-settings-outline';
+        }else if (route.name === 'Messages') {
+          iconName = focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline';
+        }else (route.name === 'Search') {
+          iconName = focused ? 'search-circle' : 'search';
         }
 
         // You can return any component that you like here!
