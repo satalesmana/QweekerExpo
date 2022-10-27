@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios'
 import {
     View, 
     Text,
@@ -8,7 +9,40 @@ import {
 } from 'react-native';
 import { PrimaryButton  } from '../../Componets'
 
-export default SecurityScreen = () => {
+export default SecurityScreen = ({navigation,route}) => {
+  const [username, onChangeUsername] = React.useState(null);
+  const [password, onChangePassword] = React.useState(null);
+  const [passwordConfirm, onChangePasswordConfirm] = React.useState(null);
+  let request = {}
+  React.useEffect(() => {
+    request = route.params
+  })
+
+  const onSubmitData =()=>{
+    const data = {
+      ...request,
+      ...{
+        "username":username,
+        "password": passwordConfirm,
+      }
+    }
+    
+    axios.post('https://data.mongodb-api.com/app/data-yvczw/endpoint/data/v1/action/insertOne',{
+      "dataSource": "Cluster0",
+      "database": "app_taskita",
+      "collection": "qweeker_member",
+      "document": data
+    },{
+      headers:{
+        'api-key':'zYwAQaYVJ2hdF6WVlhy4gFM7i6IOGAcAJ5lips8IYEjIkXjoksjPpuTBZvGjt4uC'
+      }
+    }).then(res=>{
+      navigation.navigate('RegisterDoneScreen')
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
+
   return ( 
     <SafeAreaView  style={styles.container}>
       <View style={styles.content}>
@@ -18,20 +52,36 @@ export default SecurityScreen = () => {
 
       <View style={styles.containerTextInput}>
         <Text style={styles.labelTextInput}>Username</Text>
-        <TextInput style={styles.inputText} placeholder='Username'/>
+        <TextInput 
+          style={styles.inputText} 
+          placeholder='Username'
+          onChangeText={onChangeUsername}
+          value={username}/>
       </View>
 
       <View style={styles.containerTextInput}>
         <Text style={styles.labelTextInput}>Password</Text>
-        <TextInput style={styles.inputText} placeholder='Password'/>
+        <TextInput 
+          style={styles.inputText} 
+          placeholder='Password'
+          onChangeText={onChangePassword}
+          value={password}/>
       </View>
 
       <View style={styles.containerTextInput}>
         <Text style={styles.labelTextInput}>Confirm Password</Text>
-        <TextInput style={styles.inputText} placeholder='Confirm Password'/>
+        <TextInput 
+          style={styles.inputText} 
+          placeholder='Confirm Password'
+          onChangeText={onChangePasswordConfirm}
+          value={passwordConfirm}/>
       </View>
 
-      <PrimaryButton title='Done' style={styles.customeButton}/>
+      <PrimaryButton 
+        title='Done' 
+        style={styles.customeButton}
+        onPress={()=> onSubmitData()}/>
+
       <View style={styles.foother}>
         <Text style={styles.boddyText}>Already have an account? </Text>
         <Text style={[styles.boddyText,{color:'#006175'}]}>Sign In</Text>

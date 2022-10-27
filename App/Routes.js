@@ -30,7 +30,7 @@ const MainScreen = () =>{
           iconName = focused ? 'ios-settings' : 'ios-settings-outline';
         }else if (route.name === 'Messages') {
           iconName = focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline';
-        }else (route.name === 'Search') {
+        }else {
           iconName = focused ? 'search-circle' : 'search';
         }
 
@@ -52,7 +52,7 @@ const MainScreen = () =>{
 
 export default Router = () => {
   return (
-    <Stack.Navigator initialRouteName="MainScreen">
+    <Stack.Navigator initialRouteName="SplashScreen">
       <Stack.Screen name="MainScreen" component={MainScreen} options={{headerShown: false}}/>
       <Stack.Screen name="SignupScreen" component={SignupScreen} options={{headerShown: false}}/>
       <Stack.Screen name="SplashScreen" component={SplashScreen} options={{headerShown: false}}/>

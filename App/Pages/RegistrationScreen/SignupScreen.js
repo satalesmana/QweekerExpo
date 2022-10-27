@@ -9,15 +9,31 @@ import {
 import { PrimaryButton  } from '../../Componets'
 
 export default SignupScreen = ({navigation}) => {
+  const [email, onChangeEmail] = React.useState(null);
+
+  const onSetNext = ()=>{
+    navigation.navigate('PersonalInfoScreen',{
+      "email":email
+    })
+  }
+
   return (
     <SafeAreaView  style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.headerText}>Email</Text>
         <Text style={styles.boddyText}>Enter your email adress</Text>
-        <TextInput style={styles.inputText} placeholder='youremail@domain.com'/>
+        <TextInput 
+          style={styles.inputText} 
+          placeholder='youremail@domain.com'
+          onChangeText={onChangeEmail}
+          value={email}/>
       </View>
      
-     <PrimaryButton title='Next' style={styles.customeButton}  onPress={()=>navigation.navigate('PersonalInfoScreen')}/>
+     <PrimaryButton 
+        title='Next' 
+        style={styles.customeButton}  
+        onPress={()=> onSetNext()}/>
+
      <View style={styles.foother}>
        <Text style={styles.boddyText}>Already have an account? </Text>
        <Text style={[styles.boddyText,{color:'#006175'}]}>Sign In</Text>
