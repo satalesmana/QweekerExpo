@@ -7,15 +7,36 @@ import {
     TextInput
 } from 'react-native';
 import { PrimaryButton  } from '../../Componets'
+import { emailValidation } from '../../utils'
 
 export default SignupScreen = ({navigation}) => {
   const [email, onChangeEmail] = React.useState(null);
+  const [isErorr, onSetIsErorr] = React.useState(false);
+
+  const ErrorEmail =()=>{
+    if(isErorr){
+      return (
+        <Text 
+          style={{color:'red', textAlign:'center', marginTop:20}}>
+            Invalid email format
+        </Text>
+      )
+    }else{
+      return null
+    }
+  }
 
   const onSetNext = ()=>{
-    navigation.navigate('PersonalInfoScreen',{
-      "email":email
-    })
+    const isValidEmail = emailValidation(email);
+    onSetIsErorr(!isValidEmail)
+    if(isValidEmail){
+      navigation.navigate('PersonalInfoScreen',{
+        "email":email
+      })
+    }
+    
   }
+
 
   return (
     <SafeAreaView  style={styles.container}>
@@ -27,6 +48,8 @@ export default SignupScreen = ({navigation}) => {
           placeholder='youremail@domain.com'
           onChangeText={onChangeEmail}
           value={email}/>
+
+          <ErrorEmail/>
       </View>
      
      <PrimaryButton 

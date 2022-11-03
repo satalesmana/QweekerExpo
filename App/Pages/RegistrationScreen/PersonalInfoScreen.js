@@ -12,18 +12,53 @@ import {
   SelectGender  
 } from '../../Componets'
 
+import { requiredValue, charValue } from '../../utils'
+
 export default PersonalInfoScreen = ({navigation,route}) => {
   const [name, onChangeName] = React.useState(null);
+  const [isValidForm, onSetValidForm] = React.useState(true);
+  const [errMessage, onSetErrorMsg] =React.useState(null);
+
+  const ErrorMessage =()=>{
+    if(!isValidForm){
+      return (
+        <Text 
+          style={{color:'red', textAlign:'center', marginTop:20}}>
+            {errMessage}
+        </Text>
+      )
+    }else{
+      return null
+    }
+  }
+
   let request = {}
   React.useEffect(() => {
     request.email = route.params.email
   })
 
   const onSetNext = ()=>{
+    onSetValidForm(true)
+    const cekIsEmptyName = requiredValue(name);
+    if(!cekIsEmptyName){
+      onSetValidForm(false)
+      onSetErrorMsg("[Full Name] : harus di isi")
+      return
+    }
+
+    const isAlvabet = charValue(name);
+    if(!isAlvabet){
+      onSetValidForm(false)
+      onSetErrorMsg("[Full Name] : harus di isi dengan alfabet")
+      return
+    }
+
     navigation.navigate('SecurityScreen',{
-        ...request,
-        ...{"name":name}
+      ...request,
+      ...{"name":name}
     })
+    
+    
   }
 
   return ( 
@@ -58,6 +93,8 @@ export default PersonalInfoScreen = ({navigation,route}) => {
         <Text style={styles.labelTextInput}>About</Text>
         <TextInput style={[styles.inputText,{height: 120, textAlignVertical: 'top'}]} placeholder='About' multiline={true}/>
       </View>
+
+      <ErrorMessage/>
 
       <PrimaryButton 
         title='Next' 
