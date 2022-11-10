@@ -1,5 +1,7 @@
 import * as React from 'react';
-import {View, Text, StyleSheet, Image, Dimensions  } from 'react-native';
+import {
+  View, Text, StyleSheet, Image, Dimensions,
+  TouchableWithoutFeedback   } from 'react-native';
 import { BannerSplash  } from '../../assets'
 import { PrimaryButton } from '../../Componets'
 const windowHeight = Dimensions.get('window').height;
@@ -21,7 +23,12 @@ export default SplashScreen = ({navigation}) => {
 
         <PrimaryButton  title="Continue" onPress={()=>navigation.navigate('SignupScreen')}/>
 
-        <Text style={styles.footherText}>Already have an account? Sign In</Text>
+        <View style={styles.foother}>
+          <Text style={styles.boddyText}>Already have an account? </Text>
+          <TouchableWithoutFeedback  onPress={()=>navigation.navigate('LoginScreen')}>
+            <Text style={[styles.boddyText,{color:'#006175'}]}>Sign In</Text>
+          </TouchableWithoutFeedback>
+        </View>
       </View>
       
     </View>
@@ -60,5 +67,14 @@ const styles = StyleSheet.create({
     marginTop:50,
     fontFamily: 'Poppins-Medium',
     fontSize:16,
-  }
+  },
+  foother:{
+    justifyContent:'center',
+    flexDirection:'row',
+    marginTop:20
+  },
+  boddyText:{
+    fontFamily:'Poppins-Medium',
+    fontSize:16,
+  },
 });

@@ -2,15 +2,25 @@ import * as React from 'react';
 import {
   Text, 
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  View
 } from 'react-native';
 
 const PrimaryButton=(props) =>{
+  if(props.isLoading){
+    return (
+      <View  style={[styles.btnContainer, props.style]} onPress={props.onPress}>
+        <Text style={styles.btnText}>Loading...</Text>
+      </View>
+    )
+  }else{
     return (
       <TouchableOpacity  style={[styles.btnContainer, props.style]} onPress={props.onPress}>
         <Text style={styles.btnText}>{props.title}</Text>
       </TouchableOpacity>
     )
+  }
+    
 }
 
 const styles = StyleSheet.create({

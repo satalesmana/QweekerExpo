@@ -12,7 +12,8 @@ import {
   SecurityScreen,
   MessagesScreen,
   SettingsScreen,
-  SearchScreen
+  SearchScreen,
+  LoginScreen
 } from './Pages';
 
 const Stack = createStackNavigator();
@@ -60,6 +61,7 @@ export default Router = () => {
       <Stack.Screen name="PersonalInfoScreen" component={PersonalInfoScreen} options={{headerShown: false}}/>
       <Stack.Screen name="SecurityScreen" component={SecurityScreen} options={{headerShown: false}}/>
       <Stack.Screen name="RegisterDoneScreen" component={RegisterDoneScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown: false}}/>
     </Stack.Navigator>
   );
 };

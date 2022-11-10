@@ -8,6 +8,7 @@ import SecurityScreen from './RegistrationScreen/SecurityScreen'
 import MessagesScreen from './MessagesScreen'
 import SettingsScreen from './SettingsScreen';
 import SearchScreen from './SearchScreen';
+import LoginScreen from './LoginScreen';
 
 export {
     HomeScreen, 
@@ -19,5 +20,6 @@ export {
     SecurityScreen,
     MessagesScreen,
     SettingsScreen,
-    SearchScreen
+    SearchScreen,
+    LoginScreen
 };

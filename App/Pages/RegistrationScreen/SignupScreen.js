@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     SafeAreaView,
-    TextInput
+    TextInput,
+    TouchableWithoutFeedback
 } from 'react-native';
 import { PrimaryButton  } from '../../Componets'
 import { emailValidation } from '../../utils'
@@ -57,10 +58,12 @@ export default SignupScreen = ({navigation}) => {
         style={styles.customeButton}  
         onPress={()=> onSetNext()}/>
 
-     <View style={styles.foother}>
-       <Text style={styles.boddyText}>Already have an account? </Text>
-       <Text style={[styles.boddyText,{color:'#006175'}]}>Sign In</Text>
-     </View>
+        <View style={styles.foother}>
+          <Text style={styles.boddyText}>Already have an account? </Text>
+          <TouchableWithoutFeedback  onPress={()=>navigation.navigate('LoginScreen')}>
+            <Text style={[styles.boddyText,{color:'#006175'}]}>Sign In</Text>
+          </TouchableWithoutFeedback>
+        </View>
     </SafeAreaView>
   );
 };
