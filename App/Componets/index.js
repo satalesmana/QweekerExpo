@@ -4,8 +4,13 @@ import {
     SelectGender
 } from './MySelect'
 
+import{
+    PrimaryCard
+}from './CardList'
+
 export {
     PrimaryButton,
     SelectDate,
-    SelectGender
+    SelectGender,
+    PrimaryCard
 }

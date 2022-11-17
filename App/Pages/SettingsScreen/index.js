@@ -1,31 +1,34 @@
 import * as React from 'react';
 import {View, Text} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment, incrementByAmount } from '../../reducers/CounterReducer'
-import { PrimaryButton } from '../../Componets'
+import { resetState } from '../../reducers/UserReducer'
+import { 
+  PrimaryButton,
+  PrimaryCard
+ } from '../../Componets'
 
 export default SettingsScreen = () => {
-  const count = useSelector(state => state.counter.value)
+  
+  const id = useSelector(state => state.user.id)
+  const name = useSelector(state => state.user.name)
+  const username = useSelector(state => state.user.username)
+  const email = useSelector(state => state.user.email)
   const dispatch = useDispatch()
-
+  
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text style={{fontSize:20, fontWeight:'bold'}}>Counter {count}</Text>
+    <View style={{flex: 1}}>
+
+      <PrimaryCard title="User ID" subtitle={id}/>
+      <PrimaryCard title="Name" subtitle={name}/>
+      <PrimaryCard title="User Name" subtitle={username}/>
+      <PrimaryCard title="Email" subtitle={email}/>
 
       <PrimaryButton
-        title="Tambahkan"
-        onPress={()=>dispatch(increment())}
+        title="Sin Out"
+        style={{marginTop:40, margin:30}}
+        onPress={()=>dispatch(resetState())}
       />
 
-      <PrimaryButton
-        title="Kurangi"
-        onPress={()=>dispatch(decrement())}
-      />
-
-      <PrimaryButton
-        title="Tambahkan 2"
-        onPress={()=>dispatch(incrementByAmount(2))}
-      />
     </View>
   );
 };

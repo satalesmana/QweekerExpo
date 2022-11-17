@@ -2,6 +2,13 @@ import axios from "axios";
 import * as React from "react";
 import { View, Text, StyleSheet, SafeAreaView, TextInput, TouchableWithoutFeedback } from "react-native";
 import { PrimaryButton } from "../../Componets";
+import { useDispatch } from 'react-redux';
+import { 
+  setId,
+  setEmail,
+  setName,
+  setUsername
+} from '../../reducers/UserReducer'
  
 export default LoginScreen = ({ navigation }) => {
   //untuk memanggil nilai dari form sebelumnya
@@ -9,7 +16,9 @@ export default LoginScreen = ({ navigation }) => {
   const [password, onChangePassword] = React.useState(null);
   const [isErorr, onSetIsErorr] = React.useState(false);
   const [message, onSetMessage] = React.useState(null);
-  const [isLoading, onSetLoading] = React.useState(false)
+  const [isLoading, onSetLoading] = React.useState(false);
+  const dispatch = useDispatch();
+
   const ErrorMessage =()=>{
     if(isErorr){
       return (
@@ -50,6 +59,13 @@ export default LoginScreen = ({ navigation }) => {
       )
       .then((res) => {
         if(res.data.document != null){
+          const document = res.data.document
+
+          dispatch(setId(document._id))
+          dispatch(setEmail(document.email))
+          dispatch(setName(document.name))
+          dispatch(setUsername(document.username))
+          
           navigation.replace("MainScreen");
         }else{
           onSetIsErorr(true)
