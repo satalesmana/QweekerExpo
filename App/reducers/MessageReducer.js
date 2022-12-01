@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+
 export const messageSlice = createSlice({
     name:'message',
     initialState:{
@@ -11,6 +12,7 @@ export const messageSlice = createSlice({
     reducers:{
         tambahData(state, action){
             state.data.push({message:action.payload})
+            
         },
     }
 })
