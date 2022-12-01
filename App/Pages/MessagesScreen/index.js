@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { 
   tambahData
 } from '../../reducers/MessageReducer'
+import { Button } from 'react-native'
 import axios from "axios";
 const BASE_URL = "https://data.mongodb-api.com/app/data-yvczw/endpoint/data/v1/"
 const HEADER = {
@@ -21,6 +22,7 @@ export default MessagesScreen = () => {
   const [inputMsg, onSetInputMsg] = React.useState(null);
   const data = useSelector(state => state.message.data);
   const dispatch = useDispatch()
+
   const addNew=()=>{
     onSetLoading(true)
     axios.post(BASE_URL+ "action/insertOne",{
@@ -30,15 +32,37 @@ export default MessagesScreen = () => {
         document: {message:inputMsg},
       },HEADER  
     ).then((res) => {
-      dispatch(tambahData(inputMsg))
+      dispatch(tambahData({
+        message: inputMsg,
+        insertedId: res.data.insertedId
+      }))
       onSetInputMsg("")
     }).catch((er)=>{
       console.log(er)
     }).finally(()=>{
       onSetLoading(false)
     })
+  }
 
-    
+  const onDelete=(message)=>{
+    console.log('delte id')
+    axios.post(BASE_URL+ "action/deleteOne",{
+        dataSource: "Cluster0",
+        database: "app_taskita",
+        collection: "pesan",
+        filter: {message:message},
+      },HEADER  
+    ).then((res) => {
+      console.log('delete data berhasil')
+      // dispatch(tambahData({
+      //   message: inputMsg,
+      //   insertedId: res.data.insertedId
+      // }))
+    }).catch((er)=>{
+      console.log(er)
+    }).finally(()=>{
+      onSetLoading(false)
+    })
   }
 
   return (
@@ -62,7 +86,19 @@ export default MessagesScreen = () => {
 
       <FlatList
         data={data}
-        renderItem={({item}) => <Text style={styles.item}>{item.message}</Text>}
+        renderItem={({item}) =>{
+          return(
+            <View style={{
+                padding:15,
+                borderBottomWidth:1, 
+                backgroundColor:'white',
+                flexDirection:'row'
+            }}>
+              <Button title='Delete' onPress={()=>onDelete(item.message)}/>
+              <Text style={styles.item}>{item.message}</Text>
+            </View>
+          )
+        }}
       />
     </View>
   );
