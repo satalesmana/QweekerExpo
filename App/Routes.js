@@ -53,7 +53,7 @@ const MainScreen = () =>{
 
 export default Router = () => {
   return (
-    <Stack.Navigator initialRouteName="SplashScreen">
+    <Stack.Navigator initialRouteName="MainScreen">
       <Stack.Screen name="MainScreen" component={MainScreen} options={{headerShown: false}}/>
       <Stack.Screen name="SignupScreen" component={SignupScreen} options={{headerShown: false}}/>
       <Stack.Screen name="SplashScreen" component={SplashScreen} options={{headerShown: false}}/>
