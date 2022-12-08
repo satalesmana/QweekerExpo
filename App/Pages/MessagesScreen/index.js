@@ -5,7 +5,9 @@ import {
 import { PrimaryButton } from "../../Componets";
 import { useSelector, useDispatch } from 'react-redux'
 import { 
-  tambahData
+  tambahData,
+  deleteMessage,
+  addMultipeData
 } from '../../reducers/MessageReducer'
 import { Button } from 'react-native'
 import axios from "axios";
@@ -22,6 +24,36 @@ export default MessagesScreen = () => {
   const [inputMsg, onSetInputMsg] = React.useState(null);
   const data = useSelector(state => state.message.data);
   const dispatch = useDispatch()
+
+  React.useEffect(()=>{
+    getData()
+  },[])
+
+  const getData=()=>{
+    axios.post(BASE_URL+ "action/find",{
+      dataSource: "Cluster0",
+      database: "app_taskita",
+      collection: "pesan",
+      filter: {},
+    },HEADER  
+  ).then((res) => {
+    const data = res.data.documents;
+    const tmpData = [];
+    data.map((item)=>{
+      tmpData.push({
+        message: item.message,
+        insertedId: item._id
+      })
+    });
+    dispatch(addMultipeData(tmpData))
+    
+    onSetInputMsg("")
+  }).catch((er)=>{
+    console.log(er)
+  }).finally(()=>{
+    onSetLoading(false)
+  })
+  }
 
   const addNew=()=>{
     onSetLoading(true)
@@ -45,7 +77,6 @@ export default MessagesScreen = () => {
   }
 
   const onDelete=(message)=>{
-    console.log('delte id')
     axios.post(BASE_URL+ "action/deleteOne",{
         dataSource: "Cluster0",
         database: "app_taskita",
@@ -53,11 +84,8 @@ export default MessagesScreen = () => {
         filter: {message:message},
       },HEADER  
     ).then((res) => {
-      console.log('delete data berhasil')
-      // dispatch(tambahData({
-      //   message: inputMsg,
-      //   insertedId: res.data.insertedId
-      // }))
+      console.log('delete data berhasil', res.data)
+      dispatch(deleteMessage(message))
     }).catch((er)=>{
       console.log(er)
     }).finally(()=>{
